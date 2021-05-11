@@ -8,28 +8,42 @@ This viewer is the base for further, more advanced variants.
 ## Features
 
 * Can load a _fixed (maximum) number_ of points from a simple input file format
-* Points are _XYZ RGB_, no transparency
-* Points can additionally be `selected`, temporarily changeing their color to a fixed selection color.
-* The point data is transformed by one configurable `model` _matrix_.
+* Points are _XYZ RGB_; no transparency.
+    * An _image-space point size_ can be configured.
+* Points can additionally be _selected_, temporarily changeing their color to a fixed selection color.
+    * Selections are created by specifying a sphere _point_ and _radius_ to switch all points inside either to selected or unselected, iteratively.
+* The point data is transformed by one configurable _model matrix_.
 * There is one _clipping box_ definition, with
-    * Extend, and a `model` matrix, and
-    * configurations to hide points inside the box, outside the box, or to show all points
-* There is only one perspective camera, `view` and `projection` matrices defined by:
-    * `position`, `lookat`, `up` vectors
-    * `near clip`, `far clip` distance hints
-    * `view angle`
+    * spatial _size_, and a _model matrix_, and
+    * _configurations_ to hide points inside the box, outside the box, or to show all points
+* There is only one perspective camera, _view_ and _projection matrices_ defined by:
+    * _position_, _lookat_, and _up_ vectors,
+    * _near clip_, _far clip_ distance hints, and
+    * _field of view angle_.
 * Interactive OpenGL 4.1 core window, based on _GLFW_, _glLoadGen_, _glm_
 * Minimalistic UI based on _DearImGui_
-* A _screenshot_ can be created at specified resolution (single fbo) and saved as PNG image file
-* All features can be controlled via UI and _command line arguments_, allowing for batch processing
+* A _screenshot_ can be created at specified resolution (single FBO) and saved as PNG image file
+* All features can be controlled via UI and _command line arguments_, allowing for batch processing.
     * Exception apply, e.g. loading data is only available via command line arguments.
 
-## Build
+## How to Build
 
 TODO
 
 ## License
 
-This software is available under the terms of Apache License 2.0.
+Copyright 2021 SGrottel (https://www.sgrottel.de)
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 For details, see [LICENSE](./LICENSE) file.
