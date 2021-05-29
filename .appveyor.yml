@@ -1,43 +1,55 @@
 shallow_clone: true
 
 configuration:
-  - Debug
-  - Release
+- Debug
+- Release
 
 environment:
   matrix:
-  - PLATFORM: x64
-    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    PLATFORM: x64
     generator: "-G\"Visual Studio 16 2019\" -A\"x64\""
     glmArguments: "--no-warn-unused-cli"
-  - PLATFORM: x86
-    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+    PLATFORM: x86
     generator: "-G\"Visual Studio 16 2019\" -A\"Win32\""
     glmArguments: "--no-warn-unused-cli"
   - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
   - APPVEYOR_BUILD_WORKER_IMAGE: macOS
 
+for:
+-
+  matrix:
+    only:
+      - image: Ubuntu
+  init:
+    - echo Ubuntu build script
+    - sh: >-
+        sudo apt-get update
+        sudo apt-get install -y xorg-dev
+#libgl1-mesa-dev libxrandr-dev libxinerama-dev
+
 before_build:
-  - ps: |
-      mkdir build
-      cd build
+- ps: |
+    mkdir build
+    cd build
 
-      $cmd = "cmake .. $env:generator -DCMAKE_BUILD_TYPE=$env:CONFIGURATION $env:glmArguments"
-      echo $cmd
+    $cmd = "cmake .. $env:generator -DCMAKE_BUILD_TYPE=$env:CONFIGURATION $env:glmArguments"
+    echo $cmd
 
-      Invoke-Expression $cmd
+    Invoke-Expression $cmd
 
 build_script:
-  - ps: |
-      $cmd = "cmake --build . --parallel --config $env:CONFIGURATION"
-      echo $cmd
+- ps: |
+    $cmd = "cmake --build . --parallel --config $env:CONFIGURATION"
+    echo $cmd
 
-      Invoke-Expression $cmd
+    Invoke-Expression $cmd
 
 test_script:
-  - ps: |
-      $exe = (Get-ChildItem -recurse "mpvdemo.exe","mpvdemo")[0].FullName
-      Write-Host $exe
-      & $exe
+- ps: |
+    $exe = (Get-ChildItem -recurse "mpvdemo.exe","mpvdemo")[0].FullName
+    Write-Host $exe
+    & $exe
 
 deploy: off
