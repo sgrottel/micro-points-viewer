@@ -1,13 +1,25 @@
 ﻿// micro-points-viewer-cmake.cpp : Defines the entry point for the application.
 //
 
-#include <iostream>
+#if defined(DEBUG) && !defined(_DEBUG)
+#define _DEBUG
+#undef NDEBUG
+#endif
+#if !defined(DEBUG) && defined(_DEBUG)
+#define DEBUG
+#undef NDEBUG
+#endif
+#if defined(NDEBUG)
+#undef DEBUG
+#undef _DEBUG
+#endif
 
+#include <iostream>
 
 int main()
 {
 	std::cout << "Hello\n";
-#if (defined(DEBUG) || defined(_DEBUG)) && !defined(NDEBUG)
+#if defined(_DEBUG)
 	std::cout << "I am a Debug build.\n";
 #else
 	std::cout << "I am a Release build.\n";

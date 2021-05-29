@@ -9,9 +9,11 @@ environment:
   - PLATFORM: x64
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     generator: "-G\"Visual Studio 16 2019\" -A\"x64\""
+    glmArguments: "--no-warn-unused-cli"
   - PLATFORM: x86
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     generator: "-G\"Visual Studio 16 2019\" -A\"Win32\""
+    glmArguments: "--no-warn-unused-cli"
   - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
   - APPVEYOR_BUILD_WORKER_IMAGE: macOS
 

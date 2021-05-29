@@ -8,6 +8,8 @@ project ("micro-points-viewer-demo")
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+add_compile_options("$<$<CONFIG:DEBUG>:-DDEBUG>")
+
 # Add source to this project's executable.
 add_executable (micro-points-viewer-demo "micro-points-viewer-demo.cpp" )
 
