@@ -21,7 +21,7 @@ for:
 -
   matrix:
     only:
-      - image: Ubuntu
+      - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
   init:
     - echo Ubuntu build script
     - sh: >-
