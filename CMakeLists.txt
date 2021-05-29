@@ -5,6 +5,9 @@ cmake_minimum_required (VERSION 3.8)
 
 project ("micro-points-viewer-demo")
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
 # Add source to this project's executable.
 add_executable (micro-points-viewer-demo "micro-points-viewer-demo.cpp" )
 

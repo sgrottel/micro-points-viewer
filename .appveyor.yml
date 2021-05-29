@@ -1,32 +1,19 @@
 shallow_clone: true
 
-image:
-  - Visual Studio 2019
-  - Ubuntu
-  - macOS
-
-platform:
-  - x86
-  - x64
-
 configuration:
   - Debug
   - Release
 
-for:
--
+environment:
   matrix:
-    only:
-    - image: Visual Studio 2019
-      platform: x64
-  environment:
+  - PLATFORM: x64
+    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     generator: "-G\"Visual Studio 16 2019\" -A\"x64\""
--
-  matrix:
-    only:
-    - image: Visual Studio 2019
-  environment:
+  - PLATFORM: x86
+    APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     generator: "-G\"Visual Studio 16 2019\""
+  - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
+  - APPVEYOR_BUILD_WORKER_IMAGE: macOS
 
 before_build:
   - ps: |
@@ -39,7 +26,11 @@ before_build:
       Invoke-Expression $cmd
 
 build_script:
-  - cmake --build . --config %CONFIGURATION%
+  - ps: |
+      $cmd = "cmake --build . -DCMAKE_BUILD_TYPE=$env:CONFIGURATION --config $env:CONFIGURATION
+      echo $cmd
+
+      Invoke-Expression $cmd
 
 test_script:
   - ps: |
