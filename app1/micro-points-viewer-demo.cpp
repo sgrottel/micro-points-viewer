@@ -14,6 +14,8 @@
 #undef _DEBUG
 #endif
 
+#include "base/lib_demo.h"
+
 #include <iostream>
 
 int main()
@@ -24,7 +26,7 @@ int main()
 #else
 	std::cout << "I am a Release build.\n";
 #endif
-	std::cout << "I am " << 8 * sizeof(void*) << " bit wide.\n";
+	std::cout << "I am " << base::getWidth() << " bit wide.\n";
 
 	std::cout << std::endl;
 	return 0;
