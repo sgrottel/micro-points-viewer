@@ -35,14 +35,18 @@ before_build:
 
     $cmd = "cmake .. $env:generator -DCMAKE_BUILD_TYPE=$env:CONFIGURATION $env:glmArguments"
     echo $cmd
-
     Invoke-Expression $cmd
 
 build_script:
 - ps: |
     $cmd = "cmake --build . --parallel --config $env:CONFIGURATION"
     echo $cmd
+    Invoke-Expression $cmd
 
+after_build:
+- ps: |
+    $cmd = "cmake --install ."
+    echo $cmd
     Invoke-Expression $cmd
 
 test_script:
