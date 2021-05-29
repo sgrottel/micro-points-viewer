@@ -7,7 +7,7 @@
 int main()
 {
 	std::cout << "Hello\n";
-#if defined(DEBUG) || defined(_DEBUG)
+#if (defined(DEBUG) || defined(_DEBUG)) && !defined(NDEBUG)
 	std::cout << "I am a Debug build.\n";
 #else
 	std::cout << "I am a Release build.\n";
