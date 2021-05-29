@@ -2,10 +2,12 @@
 #define lib_demo_h_included
 #pragma once
 
+#include <glm/glm.hpp>
+
 namespace base
 {
 
-	int getWidth();
+	glm::uvec2 getWidth();
 
 }
 

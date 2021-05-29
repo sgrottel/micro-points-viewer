@@ -28,7 +28,7 @@ int main()
 #else
 	std::cout << "I am a Release build.\n";
 #endif
-	std::cout << "I am " << base::getWidth() << " bit wide.\n";
+	std::cout << "I am " << base::getWidth().x << " bit wide.\n";
 
 	std::cout << std::endl;
 	return 0;

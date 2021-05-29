@@ -1,6 +1,6 @@
 #include "base/lib_demo.h"
 
-int base::getWidth()
+glm::uvec2 base::getWidth()
 {
-	return 8 * sizeof(void*);
+	return glm::uvec2(8 * sizeof(void*), 0);
 }

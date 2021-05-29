@@ -32,7 +32,7 @@ function(require_external NAME)
 		endif()
 
 		add_external_headeronly_project(glm
-			GIT_REPOSITORY https://github.com/g-truc/glm.git
+			GIT_REPOSITORY https://github.com/sgrottel/glm.git
 			GIT_TAG "0.9.9.8")
 
 	# Built libraries #####################################################
@@ -52,7 +52,7 @@ function(require_external NAME)
 		endif ()
 
 		add_external_project(glfw STATIC
-			GIT_REPOSITORY https://github.com/glfw/glfw.git
+			GIT_REPOSITORY https://github.com/sgrottel/glfw.git
 			GIT_TAG "3.3.4"
 			BUILD_BYPRODUCTS "<INSTALL_DIR>/${GLFW_LIB}"
 			CMAKE_ARGS
