@@ -27,7 +27,7 @@ before_build:
 
 build_script:
   - ps: |
-      $cmd = "cmake --build . -DCMAKE_BUILD_TYPE=$env:CONFIGURATION --config $env:CONFIGURATION
+      $cmd = "cmake --build . -DCMAKE_BUILD_TYPE=$env:CONFIGURATION --config $env:CONFIGURATION"
       echo $cmd
 
       Invoke-Expression $cmd
