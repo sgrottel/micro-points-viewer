@@ -1,6 +1,6 @@
 # CMakeList.txt : application #1 demo
 #
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
 
 add_executable(mpvdemo
 	"mpvdemo.cpp"
@@ -17,3 +17,5 @@ target_link_libraries(mpvdemo PRIVATE
 	${OPENGL_LIBRARIES}
 	glfw
 	)
+
+install(TARGETS mpvdemo DESTINATION bin)
