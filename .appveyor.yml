@@ -45,17 +45,17 @@ build_script:
 
 after_build:
 - ps: |
-    $cmd = "cmake --install ."
+    $cmd = "cmake --install . --config $env:CONFIGURATION"
     echo $cmd
     Invoke-Expression $cmd
 
+artifacts:
+- path: install
+
 test_script:
 - ps: |
-    $exe = (Get-ChildItem -recurse "mpvdemo.exe","mpvdemo")[0].FullName
+    $exe = (Get-ChildItem "$env:APPVEYOR_BUILD_FOLDER/install/bin/mpvdemo*")[0].FullName
     Write-Host $exe
     & $exe
-
-    cd "$env:APPVEYOR_BUILD_FOLDER/install"
-    Get-ChildItem -recurse
 
 deploy: off

@@ -21,4 +21,10 @@ add_subdirectory(baselib)
 # app1
 add_subdirectory(app1)
 
+# install
+install_files(ADDITIONAL_CLEAN_FILES
+	"README.md"
+	"LICENSE"
+	)
+
 # TODO: Add tests and install targets if needed.
