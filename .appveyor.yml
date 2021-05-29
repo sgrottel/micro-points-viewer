@@ -36,7 +36,7 @@ build_script:
 
 test_script:
   - ps: |
-      $exe = (Get-ChildItem -recurse "micro-points-viewer-demo.exe","micro-points-viewer-demo")[0].FullName
+      $exe = (Get-ChildItem -recurse "mpvdemo.exe","mpvdemo")[0].FullName
       Write-Host $exe
       & $exe
 
