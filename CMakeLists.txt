@@ -25,6 +25,7 @@ add_subdirectory(app1)
 install(FILES
 	"README.md"
 	"LICENSE"
+	DESTINATION .
 	)
 
 # TODO: Add tests and install targets if needed.
