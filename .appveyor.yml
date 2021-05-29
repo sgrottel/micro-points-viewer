@@ -33,7 +33,7 @@ before_build:
     mkdir build
     cd build
 
-    $cmd = "cmake .. $env:generator -DCMAKE_BUILD_TYPE=$env:CONFIGURATION -DCMAKE_INSTALL_PREFIX="$env:APPVEYOR_BUILD_FOLDER/install" $env:glmArguments"
+    $cmd = "cmake .. $env:generator -DCMAKE_BUILD_TYPE=$env:CONFIGURATION -DCMAKE_INSTALL_PREFIX=`"$env:APPVEYOR_BUILD_FOLDER/install`" $env:glmArguments"
     echo $cmd
     Invoke-Expression $cmd
 
