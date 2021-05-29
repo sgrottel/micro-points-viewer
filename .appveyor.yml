@@ -26,8 +26,7 @@ for:
     - echo Ubuntu build script
     - sh: |-
         sudo apt-get update
-        sudo apt-get install -y xorg-dev
-#libgl1-mesa-dev libxrandr-dev libxinerama-dev
+        sudo apt-get install -y xorg-dev libgl1-mesa-dev
 
 before_build:
 - ps: |
