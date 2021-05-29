@@ -11,7 +11,7 @@ environment:
     generator: "-G\"Visual Studio 16 2019\" -A\"x64\""
   - PLATFORM: x86
     APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-    generator: "-G\"Visual Studio 16 2019\""
+    generator: "-G\"Visual Studio 16 2019\" -A\"Win32\""
   - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
   - APPVEYOR_BUILD_WORKER_IMAGE: macOS
 
@@ -27,14 +27,13 @@ before_build:
 
 build_script:
   - ps: |
-      $cmd = "cmake --build . -DCMAKE_BUILD_TYPE=$env:CONFIGURATION --config $env:CONFIGURATION"
+      $cmd = "cmake --build . --parallel --config $env:CONFIGURATION"
       echo $cmd
 
       Invoke-Expression $cmd
 
 test_script:
   - ps: |
-      Get-ChildItem -recurse
       $exe = (Get-ChildItem -recurse "micro-points-viewer-demo.exe","micro-points-viewer-demo")[0].FullName
       Write-Host $exe
       & $exe
