@@ -22,7 +22,7 @@ add_subdirectory(baselib)
 add_subdirectory(app1)
 
 # install
-install_files(ADDITIONAL_CLEAN_FILES
+install(FILES
 	"README.md"
 	"LICENSE"
 	)
