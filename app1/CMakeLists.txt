@@ -6,12 +6,13 @@ add_executable(mpvdemo
 	"mpvdemo.cpp"
 	)
 
+require_external(glfw)
+
 find_package(OpenGL REQUIRED)
-find_package(glfw3 3.3 REQUIRED)
 
 target_include_directories(mpvdemo PRIVATE ${OPENGL_INCLUDE_DIRS})
 
-target_link_libraries(mpvdemo PUBLIC
+target_link_libraries(mpvdemo PRIVATE
 	baselib
 	${OPENGL_LIBRARIES}
 	glfw
