@@ -5,6 +5,12 @@ With _point data_, I mean both, volumetric point data, e.g. from simulations, an
 The _minimalistic_ aspect includes both, only providing core functionality, and avoiding clever data structures as much as possible.
 This viewer is the base for further, more advanced variants.
 
+Main:
+[![Build status](https://ci.appveyor.com/api/projects/status/djy1g0x67pnag2qi/branch/main?svg=true)](https://ci.appveyor.com/project/s_grottel/micro-points-viewer/branch/main)
+
+Latest Commit:
+[![Build status](https://ci.appveyor.com/api/projects/status/djy1g0x67pnag2qi?svg=true)](https://ci.appveyor.com/project/s_grottel/micro-points-viewer)
+
 ## Features
 
 * Can load a _fixed (maximum) number_ of points from a simple input file format
