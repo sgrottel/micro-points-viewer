@@ -1,4 +1,4 @@
-﻿// micro-points-viewer-cmake.cpp : Defines the entry point for the application.
+﻿// mpvcmake.cpp : Defines the entry point for the application.
 //
 
 #if defined(DEBUG) && !defined(_DEBUG)
@@ -17,6 +17,8 @@
 #include "base/lib_demo.h"
 
 #include <iostream>
+
+#include <GLFW/glfw3.h>
 
 int main()
 {
