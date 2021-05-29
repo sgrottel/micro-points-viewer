@@ -24,7 +24,7 @@ for:
       - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu
   init:
     - echo Ubuntu build script
-    - sh: >-
+    - sh: |-
         sudo apt-get update
         sudo apt-get install -y xorg-dev
 #libgl1-mesa-dev libxrandr-dev libxinerama-dev
