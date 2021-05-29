@@ -33,7 +33,7 @@ before_build:
     mkdir build
     cd build
 
-    $cmd = "cmake .. $env:generator -DCMAKE_BUILD_TYPE=$env:CONFIGURATION -DCMAKE_INSTALL_PREFIX=`"$env:APPVEYOR_BUILD_FOLDER/install`" $env:glmArguments"
+    $cmd = "cmake .. $env:generator -DCMAKE_BUILD_TYPE=$env:CONFIGURATION -DCMAKE_INSTALL_PREFIX=`"$env:APPVEYOR_BUILD_FOLDER/install/mpv`" $env:glmArguments"
     echo $cmd
     Invoke-Expression $cmd
 
@@ -51,10 +51,11 @@ after_build:
 
 artifacts:
 - path: install
+  name: mpv-0.0.1
 
 test_script:
 - ps: |
-    $exe = (Get-ChildItem "$env:APPVEYOR_BUILD_FOLDER/install/bin/mpvdemo*")[0].FullName
+    $exe = (Get-ChildItem "$env:APPVEYOR_BUILD_FOLDER/install/mpv/bin/mpvdemo*")[0].FullName
     Write-Host $exe
     & $exe
 
