@@ -1,0 +1,102 @@
+#
+# Micro Points Viewer
+#
+shallow_clone: true
+
+platform:
+- x64
+- x86
+
+configuration:
+- Release
+- Debug
+
+image:
+- Visual Studio 2019
+- Ubuntu
+- macOS
+
+matrix:
+  exclude:
+  - image: Ubuntu
+    platform: x86
+  - image: macOS
+    platform: x86
+
+for:
+-
+  matrix:
+    only:
+      - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+        PLATFORM: x64
+  environment:
+    generator: "-G\"Visual Studio 16 2019\" -A\"x64\""
+-
+  matrix:
+    only:
+      - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+        PLATFORM: x86
+  environment:
+    generator: "-G\"Visual Studio 16 2019\" -A\"Win32\""
+
+before_build:
+- ps: |
+    # Fetch project version from root CMakeLists.txt
+    if ((gc "$env:APPVEYOR_BUILD_FOLDER/CMakeLists.txt" | out-string) -match "project\([^)]*VERSION\s(\d+(?:.\d+)*)[^)]*\)") {
+      $ver = $matches[1].ToString()
+      while ($ver.split('.').Length -lt 3) { $ver += '.0' }
+      appveyor UpdateBuild -Version "$ver.$env:APPVEYOR_BUILD_NUMBER"
+    }
+    # configure
+    mkdir build
+    cd build
+    $cmd = "cmake .. $env:generator -DCMAKE_BUILD_TYPE=$env:CONFIGURATION -DCMAKE_INSTALL_PREFIX=`"$env:APPVEYOR_BUILD_FOLDER/install/myPointsViewer`""
+    echo $cmd
+    Invoke-Expression $cmd
+    cd ..
+
+build_script:
+- ps: |
+    cd build
+    $cmd = "cmake --build . --parallel --config $env:CONFIGURATION"
+    echo $cmd
+    Invoke-Expression $cmd
+    cd ..
+
+after_build:
+- ps: |
+    cd build
+    $cmd = "cmake --install . --config $env:CONFIGURATION"
+    echo $cmd
+    Invoke-Expression $cmd
+    cd ..
+    cd install
+    Compress-Archive -Path "$env:APPVEYOR_BUILD_FOLDER/install/*" -DestinationPath "myPointsViewer-$env:APPVEYOR_BUILD_VERSION.zip" -Force
+    cd ..
+
+artifacts:
+- path: install/myPointsViewer-*.zip
+
+test_script:
+- ps: |
+    $XSLInputElement = New-Object System.Xml.Xsl.XslCompiledTransform
+    $XSLInputElement.Load("$env:APPVEYOR_BUILD_FOLDER/scripts/ctest2junit/ctest-to-junit.xsl")
+    $webclient = New-Object 'System.Net.WebClient'
+
+    cd build
+    $cmd = "ctest -T Test -C $env:CONFIGURATION"
+    echo $cmd
+    Invoke-Expression $cmd
+    $testError = $lastexitcode
+
+    foreach($file in $(gci Testing\*\Test.xml))
+    {
+        $XSLInputElement.Transform($file, (Join-Path (Resolve-Path .) "ctest-to-junit-results.xml"))
+        $webclient.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\ctest-to-junit-results.xml))
+    }
+    cd ..
+    if($testError) {
+      throw $testError
+    }
+
+deploy: off
