@@ -10,6 +10,7 @@ This viewer is the base for further, more advanced variants.
 ## Features
 
 * Can load a _fixed (maximum) number_ of points from a simple input file format
+    * [PTS file format](./doc/pts.md) 
 * Points are _XYZ RGB_; no transparency.
     * An _object-space point/ball size_ can be configured.
     * Points are to be rendered as unlit, unshaded balls.
