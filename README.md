@@ -14,8 +14,8 @@ This viewer is the base for further, more advanced variants.
 * Points are _XYZ RGB_; no transparency.
     * An _object-space point/ball size_ can be configured.
     * Points are to be rendered as unlit, unshaded balls.
-* Points can additionally be _selected_, temporarily changeing their color to a fixed selection color.
-    * Selections are created by specifying a sphere _point_ and _radius_ to switch all points inside either to selected or unselected, iteratively.
+* Points can additionally be _selected_, temporarily changing their color to a fixed selection color.
+    * ~~Selections are created by specifying a sphere _point_ and _radius_ to switch all points inside either to selected or unselected, iteratively.~~
 * The point data is transformed by one configurable _model matrix_.
 * There is one _clipping box_ definition, with
     * spatial _size_, and a _model matrix_, and
