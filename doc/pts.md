@@ -16,7 +16,7 @@ There are fewer variants in the field, compared to alternative formats, like XYZ
 ## Encoding
 
 The text files only contain very vew possible characters:
-`0-1 . -` `\s` _space_, `\n` _new line_, (`\r` _carriage return_)
+`0-9 . -` `\s` _space_, `\n` _new line_, (`\r` _carriage return_)
 Any other characters should be ignored.
 
 The input file can be assumed to be 7-bit ascii (or 7-bit range of UTF-8).
@@ -76,7 +76,9 @@ This definition is based on the information from the following web resources:
 * https://www.cloudcompare.org/
 
 
-## Example
+## Examples
+
+### Simple
 
 PTS files can look like this:
 
@@ -90,3 +92,18 @@ PTS files can look like this:
 [...]
 ```
 
+### Boxes
+
+The following example files show a raster of points forming a simple box.
+RGB colors are generated color ramps following the main axes.
+The intensity value represent the distance to the box center.
+
+* [box_pos.pts](box_pos.pts) - position only (3 elements per line)
+* [box_i.pts](box_i.pts) - position and intensity (4 elements per line)
+* [box_rgb.pts](box_rgb.pts) - position and rgb color (6 elements per line)
+* [box_irgb.pts](box_irgb.pts) - position, intensity, and rgb color (7 elements per line)
+
+### Written by CloudCompare
+
+The file [arrowsys.pts](arrowsys.pts) was create by [CloudCompare](https://www.cloudcompare.org/), by sampling 1000 points from the mesh created by the simple code [ArrowSysMaker](https://github.com/sgrottel/ArrowSysMaker).
+The point cloud sampling was done without normal data.
