@@ -31,7 +31,7 @@ for:
         PLATFORM: x64
   environment:
     generator: "-G\"Visual Studio 16 2019\" -A\"x64\""
-    vcpkg_triplet: " --triplet=x64-windows"
+    vcpkg_triplet: " --triplet x64-windows "
     VCPKG_DEFAULT_TRIPLET: x64-windows
 -
   matrix:
@@ -40,8 +40,19 @@ for:
         PLATFORM: x86
   environment:
     generator: "-G\"Visual Studio 16 2019\" -A\"Win32\""
-    vcpkg_triplet: " --triplet=x86-windows"
+    vcpkg_triplet: " --triplet x86-windows "
     VCPKG_DEFAULT_TRIPLET: x86-windows
+
+install:
+- ps: |
+    cd (Get-Command vcpkg | Split-Path)
+    git pull
+    if ($IsWindows -eq $false) {
+      .\bootstrap-vcpkg.sh
+    } else {
+      .\bootstrap-vcpkg.bat
+    }
+    cd %APPVEYOR_BUILD_FOLDER%
 
 before_build:
 - ps: |
@@ -53,7 +64,7 @@ before_build:
     }
     # vcpkg
     $env:VCPKG_INSTALLATION_ROOT = ((Get-Command vcpkg | Split-Path) -replace '\\', '/')
-    $cmd = "vcpkg install glm $env:vcpkg_triplet"
+    $cmd = "vcpkg install $env:vcpkg_triplet glm glfw3 catch2"
     echo $cmd
     Invoke-Expression $cmd
     if ($lastexitcode -ne 0) { throw $lastexitcode }
