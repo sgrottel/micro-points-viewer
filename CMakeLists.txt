@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.10)
 # vcpkg
 if(DEFINED ENV{VCPKG_INSTALLATION_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
 	set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
-	message("Set toolchain to: $ENV{VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake")
+	message("Set toolchain to: ${CMAKE_TOOLCHAIN_FILE}")
 else()
 	message("Keeping toolchain at: ${CMAKE_TOOLCHAIN_FILE}")
 endif()
@@ -23,7 +23,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_compile_options("$<$<CONFIG:DEBUG>:-DDEBUG>")
 
 # dependencies
-find_package(glm CONFIG REQUIRED)
+find_package(glm REQUIRED)
 
 # common core library
 add_subdirectory(core)

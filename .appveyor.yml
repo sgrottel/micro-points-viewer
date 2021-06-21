@@ -51,7 +51,8 @@ before_build:
     }
     # vcpkg
     $env:VCPKG_INSTALLATION_ROOT = ((Get-Command vcpkg | Split-Path) -replace '\\', '/')
-    vcpkg install glm $env:vcpkg_triplet
+    Invoke-Expression "vcpkg install glm $env:vcpkg_triplet"
+    if ($lastexitcode -ne 0) { throw $lastexitcode }
     # configure
     mkdir build
     cd build
