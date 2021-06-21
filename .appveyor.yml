@@ -52,7 +52,7 @@ install:
     } else {
       .\bootstrap-vcpkg.bat
     }
-    cd %APPVEYOR_BUILD_FOLDER%
+    cd $env:APPVEYOR_BUILD_FOLDER
 
 before_build:
 - ps: |
