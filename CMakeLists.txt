@@ -4,6 +4,11 @@
 #
 cmake_minimum_required(VERSION 3.10)
 
+# vcpkg
+if(DEFINED ENV{VCPKG_INSTALLATION_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+	set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
+endif()
+
 #
 project(MyPtsViewer VERSION 0.1.1)
 
@@ -14,11 +19,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # define DEBUG on all platforms for debug builds
 add_compile_options("$<$<CONFIG:DEBUG>:-DDEBUG>")
 
-# vcpkg
-if(DEFINED ENV{VCPKG_INSTALLATION_ROOT} AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
-	set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
-endif()
-
+# dependencies
 find_package(glm CONFIG REQUIRED)
 
 # common core library
