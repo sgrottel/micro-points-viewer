@@ -50,7 +50,7 @@ before_build:
       appveyor UpdateBuild -Version "$ver.$env:APPVEYOR_BUILD_NUMBER"
     }
     # vcpkg
-    $env:VCPKG_INSTALLATION_ROOT = (Get-Command vcpkg | Split-Path)
+    $env:VCPKG_INSTALLATION_ROOT = ((Get-Command vcpkg | Split-Path) -replace '\\', '/')
     vcpkg install glm $env:vcpkg_triplet
     # configure
     mkdir build
