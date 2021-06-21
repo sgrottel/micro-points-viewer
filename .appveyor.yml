@@ -31,6 +31,7 @@ for:
         PLATFORM: x64
   environment:
     generator: "-G\"Visual Studio 16 2019\" -A\"x64\""
+    vcpkg_triplet: " --triplet=x64-windows"
 -
   matrix:
     only:
@@ -38,6 +39,7 @@ for:
         PLATFORM: x86
   environment:
     generator: "-G\"Visual Studio 16 2019\" -A\"Win32\""
+    vcpkg_triplet: " --triplet=x86-windows"
 
 before_build:
 - ps: |
@@ -47,6 +49,8 @@ before_build:
       while ($ver.split('.').Length -lt 3) { $ver += '.0' }
       appveyor UpdateBuild -Version "$ver.$env:APPVEYOR_BUILD_NUMBER"
     }
+    # vcpkg
+    vcpkg install glm $env:vcpkg_triplet
     # configure
     mkdir build
     cd build

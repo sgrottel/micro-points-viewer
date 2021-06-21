@@ -5,6 +5,8 @@ cmake_minimum_required(VERSION 3.10)
 
 add_test(NAME AppOGLRunTest COMMAND myPtsViewerOGL)
 
+#target_link_libraries(myPtsViewerCoreTestRunner PRIVATE glm::glm)
+
 # add_test(NAME Usage COMMAND Tutorial)
 # set_tests_properties(Usage
 #   PROPERTIES PASS_REGULAR_EXPRESSION "Usage:.*number"

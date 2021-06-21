@@ -14,6 +14,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # define DEBUG on all platforms for debug builds
 add_compile_options("$<$<CONFIG:DEBUG>:-DDEBUG>")
 
+find_package(glm CONFIG REQUIRED)
+
 # common core library
 add_subdirectory(core)
 # app -- CPU implementation
