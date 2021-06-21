@@ -50,6 +50,7 @@ before_build:
       appveyor UpdateBuild -Version "$ver.$env:APPVEYOR_BUILD_NUMBER"
     }
     # vcpkg
+    Get-Command vcpkg
     vcpkg install glm $env:vcpkg_triplet
     # configure
     mkdir build
@@ -57,6 +58,7 @@ before_build:
     $cmd = "cmake .. $env:generator -DCMAKE_BUILD_TYPE=$env:CONFIGURATION -DCMAKE_INSTALL_PREFIX=`"$env:APPVEYOR_BUILD_FOLDER/install/myPointsViewer`""
     echo $cmd
     Invoke-Expression $cmd
+    if ($lastexitcode -ne 0) throw 1
     cd ..
 
 build_script:
@@ -65,6 +67,7 @@ build_script:
     $cmd = "cmake --build . --parallel --config $env:CONFIGURATION"
     echo $cmd
     Invoke-Expression $cmd
+    if ($lastexitcode -ne 0) throw 1
     cd ..
 
 after_build:
@@ -73,6 +76,7 @@ after_build:
     $cmd = "cmake --install . --config $env:CONFIGURATION"
     echo $cmd
     Invoke-Expression $cmd
+    if ($lastexitcode -ne 0) throw 1
     cd ..
     cd install
     Compress-Archive -Path "$env:APPVEYOR_BUILD_FOLDER/install/*" -DestinationPath "myPointsViewer-$env:APPVEYOR_BUILD_VERSION.zip" -Force
