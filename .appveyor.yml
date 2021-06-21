@@ -32,6 +32,7 @@ for:
   environment:
     generator: "-G\"Visual Studio 16 2019\" -A\"x64\""
     vcpkg_triplet: " --triplet=x64-windows"
+    VCPKG_DEFAULT_TRIPLET: x64-windows
 -
   matrix:
     only:
@@ -40,6 +41,7 @@ for:
   environment:
     generator: "-G\"Visual Studio 16 2019\" -A\"Win32\""
     vcpkg_triplet: " --triplet=x86-windows"
+    VCPKG_DEFAULT_TRIPLET: x86-windows
 
 before_build:
 - ps: |
@@ -51,7 +53,9 @@ before_build:
     }
     # vcpkg
     $env:VCPKG_INSTALLATION_ROOT = ((Get-Command vcpkg | Split-Path) -replace '\\', '/')
-    Invoke-Expression "vcpkg install glm $env:vcpkg_triplet"
+    $cmd = "vcpkg install glm $env:vcpkg_triplet"
+    echo $cmd
+    Invoke-Expression $cmd
     if ($lastexitcode -ne 0) { throw $lastexitcode }
     # configure
     mkdir build

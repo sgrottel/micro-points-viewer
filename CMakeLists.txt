@@ -23,7 +23,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_compile_options("$<$<CONFIG:DEBUG>:-DDEBUG>")
 
 # dependencies
-find_package(glm REQUIRED)
+find_package(glm CONFIG REQUIRED)
 
 # common core library
 add_subdirectory(core)
